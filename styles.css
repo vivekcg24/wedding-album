@@ -1,0 +1,66 @@
+:root{--gap:12px;--card-bg:#fff;--max-width:1200px}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;color:#222;
+	/* Wedding-themed soft gradient + subtle radial accents */
+	background: linear-gradient(135deg,#fffaf6 0%,#fff6fb 100%);
+	background-attachment: fixed;
+}
+/* decorative radial accents */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background-image:
+	radial-gradient(circle at 10% 10%, rgba(250,220,210,0.06) 0 8%, transparent 9%),
+	radial-gradient(circle at 90% 80%, rgba(230,200,240,0.06) 0 10%, transparent 11%);
+}
+header{padding:24px 16px;background:#fff;border-bottom:1px solid #e6e8eb}
+header{position:relative;z-index:1;padding:28px 16px 20px;background:linear-gradient(90deg,#fff6f2,#fffaf6);border-bottom:1px solid rgba(0,0,0,0.06)}
+header h1{margin:0;font-size:1.9rem;letter-spacing:0.5px;color:#5b2b2b}
+header p{margin-top:6px;color:#7a5a57}
+header:after{content:"";display:block;height:6px;width:80px;background:linear-gradient(90deg,#d6a84b,#f2c94c);border-radius:4px;margin-top:14px}
+main{max-width:var(--max-width);margin:24px auto;padding:0 16px}
+.album{margin-bottom:34px;background:rgba(255,255,255,0.6);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(79,45,51,0.04);backdrop-filter: blur(4px)}
+.album h2{margin:0 0 12px 0;font-size:1.15rem;color:#7a2b2b;padding-left:10px;position:relative}
+.album h2:before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);height:36px;width:4px;background:linear-gradient(180deg,#d6a84b,#f2c94c);border-radius:3px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--gap)}
+.grid img{width:100%;height:160px;object-fit:cover;border-radius:8px;box-shadow:0 6px 18px rgba(31,18,18,.06);background:#eee;transition:transform .22s ease,box-shadow .22s ease,filter .22s ease}
+.grid img:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 18px 40px rgba(32,18,18,.12);filter:saturate(1.05)}
+footer{padding:16px;text-align:center;color:#666}
+
+@media (max-width:520px){.grid img{height:120px}}
+
+/* Lightbox / modal styles */
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;z-index:9999}
+#lightbox.open{display:flex}
+#lightbox .container{position:relative;max-width:95%;max-height:95%;display:flex;align-items:center;justify-content:center}
+#lightbox img{max-width:100%;max-height:100%;border-radius:6px;box-shadow:0 6px 30px rgba(0,0,0,.6)}
+#lightbox .nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.08);border:0;color:#fff;padding:12px;border-radius:50%;cursor:pointer}
+#lightbox .nav-btn:hover{background:rgba(255,255,255,0.12)}
+#lightbox .prev{left:8px}
+#lightbox .next{right:8px}
+#lightbox .close{position:absolute;right:10px;top:10px;background:transparent;border:0;color:#fff;font-size:20px;padding:8px;cursor:pointer}
+#lightbox .caption{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;color:#fff;font-size:14px;background:rgba(0,0,0,0.35);padding:6px 10px;border-radius:6px}
+
+.grid img{cursor:pointer}
+
+/* small screens adjustments */
+@media (max-width:520px){
+	.grid img{height:120px}
+	header h1{font-size:1.4rem}
+}
+
+/* Mobile-specific improvements: larger tap targets, spacing, and lightbox sizing */
+@media (max-width:420px){
+	main{margin:12px auto;padding:0 12px}
+	:root{--gap:10px}
+	.grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--gap)}
+	.grid img{height:140px;border-radius:10px}
+	.album{padding:12px}
+	.album h2{font-size:1rem}
+	/* bigger lightbox controls for touch */
+	#lightbox .nav-btn{padding:16px;font-size:18px}
+	#lightbox .close{font-size:22px;padding:10px}
+	#lightbox .caption{font-size:15px;padding:8px 12px}
+	#lightbox .container{padding:8px}
+}
+
+/* Ensure buttons and images are touch-friendly */
+button, .nav-btn, .close{touch-action:manipulation}
+.grid img{touch-action:manipulation;-webkit-tap-highlight-color: transparent}
